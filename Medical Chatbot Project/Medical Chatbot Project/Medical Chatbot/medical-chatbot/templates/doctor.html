@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediBot - Find Doctors</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f9fc;
+            color: #333;
+        }
+        
+        /* Header styles matching other pages */
+        header {
+            background-color: #fff;
+            padding: 0.2rem 5%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgb(0, 212, 42);
+        }
+        
+        /* Navigation styles */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 3.5em;
+            height: 5em;
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgb(0, 212, 42);
+            transition: color 0.3s ease;
+            margin-left: 10px;
+        }
+        
+        header.scrolled .logo span {
+            color: #fff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        header.scrolled nav ul li a {
+            color: #fff;
+        }
+        
+        nav ul li a:hover {
+            color: rgb(0, 212, 42);
+        }
+        
+        header.scrolled nav ul li a:hover {
+            color: #e0f7fa;
+        }
+        
+        /* Search bar styles */
+        .search-containers {
+            position: relative;
+            margin-right: 20px;
+        }
+        
+        .search-bar {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            width: 200px;
+            transition: all 0.3s;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: rgb(0, 212, 42);
+            width: 250px;
+        }
+        
+        .search-icons {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: rgb(0, 212, 42);
+        }
+        
+        /* Hero section */
+        .hero {
+            padding: 60px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Doctor cards */
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.2);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            color: rgb(0, 212, 42);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .card-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(0, 212, 42);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .card-btn:hover {
+            background-color: #0097a7;
+        }
+        
+        .card-details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .card-details p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* Footer */
+        .footer {
+            width: 100%;
+            background: rgb(0, 212, 42);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: white;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/MediBot Logo.jpg" alt="MediBot Logo">
+            <span>MediBot</span>
+        </div>
+        <nav>
+            <div class="nav-right">
+                <div class="search-containers">
+                    <input type="text" placeholder="Search doctors..." class="search-bar">
+                    <button class="search-icons">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                </div>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/service">Service</a></li>
+                    <li><a href="/scheme">Govt. Scheme</a></li>
+                    <li><a href="/doctor">Doctor</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="card">
+                <img src="/static/images/vipul.jpg" alt="Dr. Vipul Agarwal" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Dr. Vipul Agarwal (Physician)</h2>
+                    <a href="#" class="card-btn learnMoreBtn">Contact Here</a>
+                    <div class="card-details" style="display: none;">
+                        <p><i class="fas fa-envelope"></i> Email: example@example.com</p>
+                        <p><i class="fas fa-phone"></i> Phone: +91 8902983293</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: F-154 next to JDA Community Hall, Near DAV Centenary Public School, Vaishali Nagar, Jaipur, Rajasthan</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="/static/images/suresh kumar.jpg" alt="Dr. Suresh Kumar Yogi" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Dr. Suresh Kumar Yogi (Chest Physician)</h2>
+                    <a href="#" class="card-btn learnMoreBtn">Contact Here</a>
+                    <div class="card-details" style="display: none;">
+                        <p><i class="fas fa-envelope"></i> Email: example@example.com</p>
+                        <p><i class="fas fa-phone"></i> Phone: +91 9079256064</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: B-63, Kalwar Road, Manglam City Jhotwara, Hathod, Jaipur, Rajasthan</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="/static/images/sumit.jpg" alt="Dr. Sumit Bochiwal" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Dr. Sumit Bochiwal (General Physician)</h2>
+                    <a href="#" class="card-btn learnMoreBtn">Contact Here</a>
+                    <div class="card-details" style="display: none;">
+                        <p><i class="fas fa-envelope"></i> Email: example@example.com</p>
+                        <p><i class="fas fa-phone"></i> Phone: +91 8046961837</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: SGK Hospital and Research Centre, 205, Kalwar Road, Opp. Vihar, Jhotwara, Jaipur, Rajasthan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="/static/images/dr.suresh Nitharwal.jpg" alt="Dr. Suresh Nitharwal" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Dr. Suresh Nitharwal (General Physician)</h2>
+                    <a href="#" class="card-btn learnMoreBtn">Contact Here</a>
+                    <div class="card-details" style="display: none;">
+                        <p><i class="fas fa-envelope"></i> Email: example@example.com</p>
+                        <p><i class="fas fa-phone"></i> Phone: +91 7737202709</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: 15, Manglam Marg, Kalwar Road, Near Hotel Krishnam Palace, Manglam City, Bajrang Colony, Jaipur, Rajasthan</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="/static/images/gDoc1.avif" alt="Coming Soon" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Coming Soon...</h2>
+                    <a href="#" class="card-btn learnMoreBtn">Contact Here</a>
+                    <div class="card-details" style="display: none;">
+                        <p><i class="fas fa-envelope"></i> Email: example@example.com</p>
+                        <p><i class="fas fa-phone"></i> Phone: 123-456-7890</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="/static/images/doc3.jpeg" alt="Coming Soon" class="card-img">
+                <div class="card-content">
+                    <h2 class="card-title">Coming Soon...</h2>
+                    <a href="#" class="card-btn learnMoreBtn">Contact Here</a>
+                    <div class="card-details" style="display: none;">
+                        <p><i class="fas fa-envelope"></i> Email: example@example.com</p>
+                        <p><i class="fas fa-phone"></i> Phone: 123-456-7890</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="footer">
+        <p>&copy; 2025 MediBot. All rights reserved.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add a class to the header when scrolling
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Contact button functionality
+            const buttons = document.querySelectorAll('.learnMoreBtn');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const details = this.nextElementSibling;
+                    if (details.style.display === 'none' || details.style.display === '') {
+                        details.style.display = 'block';
+                        this.textContent = 'Hide Details';
+                    } else {
+                        details.style.display = 'none';
+                        this.textContent = 'Contact Here';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

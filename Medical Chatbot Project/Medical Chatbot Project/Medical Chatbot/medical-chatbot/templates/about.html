@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About MediBot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f9fc; /* Light blue background similar to index */
+            color: #333;
+        }
+        
+        /* Header styles matching index page */
+        header {
+            background-color: #fff;
+            padding: 0.2rem 5%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgb(0, 212, 42); /* Teal blue from index page */
+        }
+        
+        /* Navigation styles matching index page */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 3.5em;
+            height: 5em;
+        }
+        
+        .logo h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color:rgb(0, 212, 42); /* Teal blue from index page */
+            transition: color 0.3s ease;
+            margin-left: 10px;
+        }
+        
+        header.scrolled .logo h2 {
+            color: #fff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        header.scrolled nav ul li a {
+            color: #fff;
+        }
+        
+        nav ul li a:hover {
+            color: rgb(0, 212, 42); /* Teal blue from index page */
+        }
+        
+        header.scrolled nav ul li a:hover {
+            color: #e0f7fa; /* Light blue hover in scrolled state */
+        }
+        
+        /* Hero section styles with index page colors */
+        .hero {
+            width: 100%;
+            height: 60vh;
+            background: url('https://source.unsplash.com/1600x900/?healthcare,technology') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 188, 212, 0.6); /* Teal blue overlay */
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero-content p {
+            font-size: 1.2em;
+            color: white;
+        }
+        
+        /* Main content container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.1); /* Teal blue shadow */
+            text-align: center;
+        }
+        
+        h2 {
+            color: rgb(0, 212, 42); /* Teal blue from index page */
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+        
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+        
+        ul li {
+            background: rgba(0, 188, 212, 0.1); /* Light teal background */
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            color: #00796b; /* Darker teal for text */
+            border-left: 4px solid rgb(0, 212, 42); /* Teal accent border */
+        }
+        
+        /* Footer with index page colors */
+        .footer {
+            width: 100%;
+            background: rgb(0, 212, 42); /* Teal blue from index page */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .footer p {
+            color: white;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/MediBot Logo.jpg" alt="MediBot Logo">
+            <h2>MediBot</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/service">Service</a></li>
+                <li><a href="/scheme">Govt. Scheme</a></li>
+                <li><a href="/doctor">Doctor</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to MediBot</h1>
+            <p>Your AI-powered medical assistant for instant health insights and emergency support.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2>About MediBot</h2>
+        <p>MediBot is an AI-powered healthcare assistant designed to analyze symptoms, provide health recommendations, and offer essential medical guidance. Our mission is to make healthcare accessible and convenient for everyone, using the power of artificial intelligence to bridge gaps in healthcare access.</p>
+        
+        <h2>Our Vision</h2>
+        <p>We aim to revolutionize healthcare accessibility by providing instant, AI-driven medical support, empowering users with real-time health insights and emergency assistance whenever they need it, wherever they are.</p>
+
+        <h2>Our Services</h2>
+        <ul>
+            <li><strong>Symptom-based AI analysis:</strong> Get instant preliminary assessments based on your symptoms</li>
+            <li><strong>Personalized health recommendations:</strong> Tailored advice for your specific health situation</li>
+            <li><strong>Emergency support and guidance:</strong> Critical information when you need it most</li>
+            <li><strong>Access to reliable medical resources:</strong> Curated information from trusted sources</li>
+            <li><strong>Multi-language support:</strong> Breaking down language barriers in healthcare</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 MediBot. All rights reserved.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add a class to the header when scrolling
+            const header = document.querySelector('header');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

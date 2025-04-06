@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediBot - Government Schemes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f9fc;
+            color: #333;
+        }
+        
+        /* Header styles matching index page */
+        header {
+            background-color: #fff;
+            padding: 0.2rem 5%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgb(0, 212, 42);
+        }
+        
+        /* Navigation styles matching index page */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 3.5em;
+            height: 5em;
+        }
+        
+        .logo h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgb(0, 212, 42);
+            transition: color 0.3s ease;
+            margin-left: 10px;
+        }
+        
+        header.scrolled .logo h2 {
+            color: #fff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        header.scrolled nav ul li a {
+            color: #fff;
+        }
+        
+        nav ul li a:hover {
+            color: rgb(0, 212, 42);
+        }
+        
+        header.scrolled nav ul li a:hover {
+            color: #e0f7fa;
+        }
+        
+        /* Hero Section */
+        .hero {
+            width: 100%;
+            height: 60vh;
+            background: url('/static/images/healthcare-banner.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 188, 212, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 30px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        .hero h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+        }
+        
+        /* Government Schemes Section */
+        .govt-schemes {
+            padding: 50px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .govt-schemes h2 {
+            color: rgb(0, 212, 42);
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        
+        /* Scheme Cards */
+        .schemes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .scheme-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid rgb(0, 212, 42);
+        }
+        
+        .scheme-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 188, 212, 0.2);
+        }
+        
+        .scheme-card h3 {
+            color: rgb(0, 212, 42);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-content h3 {
+            color: rgb(0, 212, 42);
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .modal-content p {
+            margin: 20px 0;
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: rgb(0, 212, 42);
+        }
+        
+        .official-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgb(0, 212, 42);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .official-link:hover {
+            background: #0097a7;
+        }
+        
+        /* Footer */
+        .footer {
+            width: 100%;
+            background: rgb(0, 212, 42);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: white;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/MediBot Logo.jpg" alt="MediBot Logo">
+            <h2>MediBot</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/service">Services</a></li>
+                <li><a href="/scheme">Govt. Schemes</a></li>
+                <li><a href="/doctor">Doctors</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Government Healthcare Schemes</h1>
+                <h2>Explore various government schemes offering free and subsidized medical care</h2>
+            </div>
+        </section>
+
+        <!-- Government Schemes Section -->
+        <section class="govt-schemes">
+            <h2>Popular Government Health Schemes</h2>
+
+            <div class="schemes-container" id="schemesContainer"></div>
+        </section>
+
+        <!-- Modal for Scheme Details -->
+        <div id="schemeModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <h3 id="schemeTitle"></h3>
+                <p id="schemeDescription"></p>
+                <a id="schemeLink" class="official-link" target="_blank">Visit Official Website</a>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer">
+        <p>&copy; 2025 MediBot. All rights reserved.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add a class to the header when scrolling
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Load schemes data
+            const schemes = [
+                { title: "Ayushman Bharat - PMJAY", description: "Provides free health insurance of ₹5 lakh per family per year for secondary and tertiary care hospitalization.", link: "https://pmjay.gov.in/" },
+                { title: "Rashtriya Swasthya Bima Yojana (RSBY)", description: "Health insurance for Below Poverty Line (BPL) families, covering hospitalization expenses up to ₹30,000 per annum.", link: "https://www.rsby.gov.in/" },
+                { title: "Pradhan Mantri Suraksha Bima Yojana (PMSBY)", description: "Accidental insurance scheme offering coverage of ₹2 lakh for just ₹12 per year premium.", link: "https://jansuraksha.gov.in/" },
+                { title: "Employees' State Insurance Scheme (ESI)", description: "Provides comprehensive medical care, maternity, disability, and sickness benefits to employees in the organized sector.", link: "https://www.esic.gov.in/" },
+                { title: "National Health Mission (NHM)", description: "Aims to strengthen healthcare infrastructure in rural areas with focus on reproductive, maternal and child health services.", link: "https://nhm.gov.in/" },
+                { title: "Central Government Health Scheme (CGHS)", description: "Comprehensive healthcare services for central government employees and pensioners across India.", link: "https://cghs.nic.in/" },
+                { title: "Janani Suraksha Yojana", description: "Safe motherhood intervention providing cash assistance to pregnant women for institutional deliveries.", link: "https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=841&lid=309" },
+                { title: "Mission Indradhanush", description: "Immunization program aiming to cover all unvaccinated or partially vaccinated children and pregnant women.", link: "https://nhm.gov.in/index1.php?lang=1&level=3&sublinkid=821&lid=309" },
+                { title: "Mukhyamantri Amrutum Yojana", description: "Gujarat's health insurance scheme covering tertiary care for low-income families up to ₹5 lakh per family per year.", link: "https://www.magujarat.com/" },
+                { title: "Deen Dayal Swasthya Seva Yojana (DDSSY)", description: "Goa's universal health insurance scheme providing coverage up to ₹2.5 lakh per family per year.", link: "https://goa.gov.in/scheme/deen-dayal-swasthya-seva-yojana-ddssy/" },
+                { title: "Balika Samriddhi Yojana", description: "Welfare scheme providing financial assistance and healthcare benefits for the girl child in BPL families.", link: "https://wcd.nic.in/" },
+                { title: "Universal Immunization Programme (UIP)", description: "One of the largest immunization programs in the world, providing vaccines against 12 deadly diseases.", link: "https://nhm.gov.in/" }
+            ];
+
+            const schemesContainer = document.getElementById("schemesContainer");
+
+            schemes.forEach((scheme, index) => {
+                const card = document.createElement("div");
+                card.classList.add("scheme-card");
+                card.innerHTML = `<h3>${scheme.title}</h3>`;
+                card.onclick = () => openModal(index);
+                schemesContainer.appendChild(card);
+            });
+
+            function openModal(index) {
+                document.getElementById("schemeTitle").textContent = schemes[index].title;
+                document.getElementById("schemeDescription").textContent = schemes[index].description;
+                document.getElementById("schemeLink").href = schemes[index].link;
+                document.getElementById("schemeModal").style.display = "flex";
+            }
+
+            function closeModal() {
+                document.getElementById("schemeModal").style.display = "none";
+            }
+        });
+    </script>
+</body>
+
+</html>
